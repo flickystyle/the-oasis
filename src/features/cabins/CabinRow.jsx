@@ -54,6 +54,7 @@ function CabinRow({ cabin }) {
         image,
         id: cabinId,
     } = cabin;
+    
     const queryClient = useQueryClient();
     const { isLoading: isDeleting, mutate } = useMutation({
         mutationFn: deleteCabin,
@@ -71,7 +72,12 @@ function CabinRow({ cabin }) {
             <div>Fits up to {maxCapacity} guests</div>
             <Price>{formatCurrency(regularPrice)}</Price>
             <Discount>{formatCurrency(discount)}</Discount>
-            <Button onClick={() => mutate(cabinId)} disabled={isDeleting}>
+            <Button
+                variation="danger"
+                size="small"
+                onClick={() => mutate(cabinId)}
+                disabled={isDeleting}
+            >
                 Delete
             </Button>
         </TableRow>
