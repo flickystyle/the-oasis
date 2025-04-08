@@ -54,7 +54,7 @@ function CabinRow({ cabin }) {
         image,
         id: cabinId,
     } = cabin;
-    
+
     const queryClient = useQueryClient();
     const { isLoading: isDeleting, mutate } = useMutation({
         mutationFn: deleteCabin,
@@ -67,7 +67,7 @@ function CabinRow({ cabin }) {
 
     return (
         <TableRow role="row">
-            <Img src={image} alt={description} />
+            <Img src={image} />
             <Cabin>{name}</Cabin>
             <div>Fits up to {maxCapacity} guests</div>
             <Price>{formatCurrency(regularPrice)}</Price>
