@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { useDeleteCabin } from './useDeleteCabin';
 import Button from '../../ui/Button';
 import CreateCabinForm from './CreateCabinForm';
+import {
+    HiPencil,
+    HiSquare2Stack,
+    HiSquare3Stack3D,
+    HiTrash,
+} from 'react-icons/hi2';
+import { HiClipboardCopy, HiOutlineClipboardCopy } from 'react-icons/hi';
+import { useAddCabin } from './useAddCabin';
 
 const TableRow = styled.div`
     display: grid;
@@ -45,22 +53,33 @@ const Discount = styled.div`
 `;
 const Div = styled.div`
     display: flex;
-    gap: 0.5rem;
+
+    gap: 0.2rem;
 `;
 function CabinRow({ cabin }) {
     const [showForm, setShowForm] = useState(false);
+    const { isAdding, addCabin } = useAddCabin();
+    const { isDeleting, deleteCabin } = useDeleteCabin();
     const {
         name,
         maxCapacity,
         regularPrice,
         discount,
-        // description,
+        description,
         image,
         id: cabinId,
     } = cabin;
 
-    const { isDeleting, deleteCabin } = useDeleteCabin();
-
+    function handleDuplicateCabin() {
+        addCabin({
+            name: `Copy of ${name}`,
+            maxCapacity,
+            regularPrice,
+            discount,
+            description,
+            image,
+        });
+    }
     return (
         <>
             <TableRow role="row">
@@ -75,19 +94,30 @@ function CabinRow({ cabin }) {
                 )}
                 <Div>
                     <Button
+                        title="add"
                         variation="primary"
                         size="small"
                         onClick={() => setShowForm((prev) => !prev)}
                     >
-                        Edit
+                        <HiPencil />
                     </Button>
                     <Button
+                        title="duplicate"
+                        variation="primary"
+                        size="small"
+                        disabled={isAdding}
+                        onClick={handleDuplicateCabin}
+                    >
+                        <HiSquare2Stack />
+                    </Button>
+                    <Button
+                        title="delete"
                         variation="danger"
                         size="small"
                         onClick={() => deleteCabin(cabinId)}
                         disabled={isDeleting}
                     >
-                        Delete
+                        <HiTrash />
                     </Button>
                 </Div>
             </TableRow>

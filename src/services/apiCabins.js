@@ -13,7 +13,7 @@ export async function getCabins() {
 
 export async function deleteCabin(id) {
     const { error } = await supabase.from('cabins').delete().eq('id', id);
-    console.log(id);
+
     if (error) {
         console.error(error);
         throw new Error('Cabin could not be deleted');
@@ -51,6 +51,8 @@ export async function addOrEditCabin(newCabin, id) {
             throw new Error('Cabin could not be added');
         }
     }
+
+    if (hasImagePath) return data;
 
     const { error: storageError } = await supabase.storage
         .from('cabin-images')
