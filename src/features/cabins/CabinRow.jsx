@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import { formatCurrency } from '../../utils/helpers';
-import Button from '../../ui/Button';
-import { deleteCabin } from '../../services/apiCabins';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FiAlertTriangle } from 'react-icons/fi';
-import toast from 'react-hot-toast';
 import { useState } from 'react';
+import { useDeleteCabin } from './useDeleteCabin';
+import Button from '../../ui/Button';
 import CreateCabinForm from './CreateCabinForm';
+
 const TableRow = styled.div`
     display: grid;
     grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -56,20 +54,12 @@ function CabinRow({ cabin }) {
         maxCapacity,
         regularPrice,
         discount,
-        description,
+        // description,
         image,
         id: cabinId,
     } = cabin;
 
-    const queryClient = useQueryClient();
-    const { isLoading: isDeleting, mutate } = useMutation({
-        mutationFn: deleteCabin,
-        onSuccess: () => {
-            toast.success('Cabin succefully deleted');
-            queryClient.invalidateQueries({ queryKey: ['cabins'] });
-        },
-        onError: (err) => toast.error(err.message),
-    });
+    const { isDeleting, deleteCabin } = useDeleteCabin();
 
     return (
         <>
@@ -78,7 +68,11 @@ function CabinRow({ cabin }) {
                 <Cabin>{name}</Cabin>
                 <div>Fits up to {maxCapacity} guests</div>
                 <Price>{formatCurrency(regularPrice)}</Price>
-                <Discount>{formatCurrency(discount)}</Discount>
+                {discount ? (
+                    <Discount>{formatCurrency(discount)}</Discount>
+                ) : (
+                    <span>&mdash;</span>
+                )}
                 <Div>
                     <Button
                         variation="primary"
@@ -90,7 +84,7 @@ function CabinRow({ cabin }) {
                     <Button
                         variation="danger"
                         size="small"
-                        onClick={() => mutate(cabinId)}
+                        onClick={() => deleteCabin(cabinId)}
                         disabled={isDeleting}
                     >
                         Delete

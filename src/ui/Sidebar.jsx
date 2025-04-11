@@ -9,7 +9,7 @@ const StyledSidebar = styled.aside`
     grid-row: 1/-1;
     display: flex;
     flex-direction: column;
-    gap: 3.2rem;
+    gap: 2.6rem;
 `;
 
 function Sidebar() {

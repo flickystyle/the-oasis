@@ -20,7 +20,7 @@ export async function deleteCabin(id) {
     }
 }
 
-export async function addOrUpdateCabin(newCabin, id) {
+export async function addOrEditCabin(newCabin, id) {
     const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
     const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
@@ -40,8 +40,6 @@ export async function addOrUpdateCabin(newCabin, id) {
               .eq('id', id)); //update cabin
 
     const { data, error } = await query.select().single();
-
-    console.log('data from API', data);
 
     if (error) {
         if (hasImagePath) {
