@@ -3,10 +3,8 @@ import FormRow from '../../ui/FormRow';
 import Input from '../../ui/Input';
 import Spinner from '../../ui/Spinner';
 
-import { useForm } from 'react-hook-form';
 import { useSettings } from './useSettings';
 import { useUpdateSetting } from './useUpdateSetting';
-
 function UpdateSettingsForm() {
     const {
         isLoading,
@@ -20,15 +18,13 @@ function UpdateSettingsForm() {
 
     const { isUpdating, updateSetting } = useUpdateSetting();
 
-    function handleUpdate(e, field) {
+    const handleUpdate = (e, field) => {
         const { value } = e.target;
         if (!value) {
             return;
         }
         updateSetting({ [field]: value });
-    }
-   
-
+    };
     if (isLoading) return <Spinner />;
     return (
         <Form>
