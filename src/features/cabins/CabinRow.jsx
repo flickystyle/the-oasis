@@ -8,6 +8,7 @@ import { formatCurrency } from '../../utils/helpers';
 import { useDeleteCabin } from './useDeleteCabin';
 import { useAddCabin } from './useAddCabin';
 import Table from '../../ui/Table';
+import Menus from '../../ui/Menus';
 
 const Img = styled.img`
     display: block;
@@ -77,47 +78,46 @@ function CabinRow({ cabin }) {
                 )}
                 <Div>
                     <Modal>
-                        <Modal.Open opens="edit">
-                            <Button
-                                title="add"
-                                variation="primary"
-                                size="small"
-                            >
-                                <HiPencil />
-                            </Button>
-                        </Modal.Open>
-                        <Modal.Window name="edit">
-                            <CreateCabinForm cabinToEdit={cabin} />
-                        </Modal.Window>
-                        <Button
-                            title="duplicate"
-                            variation="primary"
-                            size="small"
-                            disabled={isAdding}
-                            onClick={handleDuplicateCabin}
-                        >
-                            <HiSquare2Stack />
-                        </Button>
-                    </Modal>
-                    <Modal>
-                        <Modal.Open opens="delete">
-                            <Button
-                                title="delete"
-                                variation="danger"
-                                size="small"
-                                disabled={isDeleting}
-                            >
-                                <HiTrash />
-                            </Button>
-                        </Modal.Open>
-                        <Modal.Window name="delete">
-                            <ConfirmDelete
-                                onCloseModal="close"
-                                resourceName="cabin"
-                                onConfirm={() => deleteCabin(cabinId)}
-                                disabled={isDeleting}
-                            />
-                        </Modal.Window>
+                        <Menus.Menu>
+                            <Menus.Toggle id={cabinId} />
+                            <Menus.List id={cabinId}>
+                                <Modal.Open opens="edit">
+                                    <Menus.Button
+                                        icon={<HiSquare2Stack />}
+                                        disabled={isAdding}
+                                    >
+                                        Edit
+                                    </Menus.Button>
+                                </Modal.Open>
+                                <Menus.Button
+                                    icon={<HiSquare2Stack />}
+                                    onClick={handleDuplicateCabin}
+                                >
+                                    Duplicate
+                                </Menus.Button>
+                                <Modal.Open opens="delete">
+                                    <Menus.Button
+                                        icon={<HiTrash />}
+                                        disabled={isDeleting}
+                                    >
+                                        Delete
+                                    </Menus.Button>
+                                </Modal.Open>
+                            </Menus.List>
+
+                            <Modal.Window name="edit">
+                                <CreateCabinForm cabinToEdit={cabin} />
+                            </Modal.Window>
+
+                            <Modal.Window name="delete">
+                                <ConfirmDelete
+                                    onCloseModal="close"
+                                    resourceName="cabin"
+                                    onConfirm={() => deleteCabin(cabinId)}
+                                    disabled={isDeleting}
+                                />
+                            </Modal.Window>
+                        </Menus.Menu>
                     </Modal>
                 </Div>
             </Table.Row>
