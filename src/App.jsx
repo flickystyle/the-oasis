@@ -9,6 +9,7 @@ import Settings from './pages/Settings';
 import Account from './pages/Account';
 import Login from './pages/Login';
 import Bookings from './pages/Bookings';
+import Booking from './pages/Booking';
 import PageNotFound from './pages/PageNotFound';
 import AppLayout from './ui/AppLayout';
 import { Toaster } from 'react-hot-toast';
@@ -39,6 +40,10 @@ function App() {
                         <Route path="settings" element={<Settings />} />
                         <Route path="account" element={<Account />} />
                         <Route path="bookings" element={<Bookings />} />
+                        <Route
+                            path="bookings/:bookingId"
+                            element={<Booking />}
+                        />
                     </Route>
                     <Route path="login" element={<Login />} />
                     <Route path="*" element={<PageNotFound />} />
