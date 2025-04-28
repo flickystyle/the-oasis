@@ -14,9 +14,16 @@ function LoginForm() {
     function handleSubmit(e) {
         e.preventDefault();
         if (!email || !password) return;
-        login({ email, password });
+        login(
+            { email, password },
+            {
+                onSettled: () => {
+                    setEmail(''), setPassword('');
+                },
+            }
+        );
     }
-    console.log(isPending);
+
     return (
         <Form onSubmit={handleSubmit}>
             <FormRowVertical label="Email address">
