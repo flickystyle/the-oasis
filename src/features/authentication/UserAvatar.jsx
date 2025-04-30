@@ -18,7 +18,7 @@ const Avatar = styled.img`
     object-fit: cover;
     object-position: center;
     border-radius: 50%;
-    outline: 2px solid var(--color-grey-100);
+    outline: 2px solid var(--color-grey-400);
 `;
 
 function UserAvatar() {
