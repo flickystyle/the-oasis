@@ -23,7 +23,6 @@ const StyledSalesChart = styled(DashboardBox)`
     }
 `;
 
-
 function SalesChart({ bookings, numDays }) {
     const { isDarkMode } = useDarkMode();
 
@@ -61,10 +60,14 @@ function SalesChart({ bookings, numDays }) {
               text: '#374151',
               background: '#fff',
           };
+
     return (
         <StyledSalesChart>
-            <Heading as="h2">Sales</Heading>
-            <ResponsiveContainer width={'100%'} height={350}>
+            <Heading as="h2">
+                Sales from ({format(allDates.at(0), 'dd MMM y')} &mdash;{' '}
+                {format(allDates.at(-1), 'dd MMM y')})
+            </Heading>
+            <ResponsiveContainer width={'100%'} height={320}>
                 <AreaChart data={data}>
                     <XAxis
                         dataKey="label"
@@ -80,6 +83,7 @@ function SalesChart({ bookings, numDays }) {
                     <Tooltip
                         contentStyle={{
                             backgroundColor: colors.background,
+                            borderRadius: '2%',
                         }}
                     />
                     <Area
