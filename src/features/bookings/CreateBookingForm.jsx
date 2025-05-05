@@ -7,11 +7,17 @@ import Select from '../../ui/Select';
 import Textarea from '../../ui/Textarea';
 
 function CreateBookingForm({ onCloseModal }) {
-    const { register, handleSubmit, reset, getValues, formState } = useForm({
+    const {
+        register,
+        handleSubmit,
+        // reset,
+        //  getValues,
+        formState,
+    } = useForm({
         // defaultValues: isEditSession ? editValues : {},
     });
     const { errors } = formState;
-    // const { isAdding, addCabin } = useAddCabin();
+    // const { isAdding, addCabin } = useAddBooking(); later
     const isAdding = true;
 
     function onSubmit() {}
