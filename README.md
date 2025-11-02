@@ -1,12 +1,41 @@
-# React + Vite
+# The Oasis — Административная панель отеля
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Тестовые деплои:**
 
-Currently, two official plugins are available:
+* Netlify: [https://the-oasis-for-u.netlify.app](https://the-oasis-for-u.netlify.app)
+* Vercel: [https://the-oasis-zeta.vercel.app](https://the-oasis-zeta.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Тестовый аккаунт**
 
-## Expanding the ESLint configuration
+* Email: `test@test.com`
+* Пароль: `12345678`
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> Вы также можете создать собственный аккаунт во вкладке **Users** (потребуется реальный email).
+
+---
+
+## О проекте
+
+The Oasis — административная панель для управления отелем: номера, бронирования, сотрудники. Проект сделан как демонстрация практической связки клиентской части на React + TypeScript с Supabase (аутентификация, хранение данных) и React Query для управления серверным состоянием.
+
+---
+
+## Стек технологий
+
+* **React** + **JavaScript**
+* **Context API** (для глобальной логики, где это нужно)
+* **styled-components** (локальные стили компонентов)
+* **Supabase** (аутентификация, база данных, хранение файлов)
+* **React Query** (кэширование и синхронизация данных)
+* **React Hook Form** (формы и валидация)
+
+---
+
+## Основной функционал
+
+* Управление **номерами** (создать / обновить / удалить / просмотр)
+* Управление **бронированиями** (CRUD, фильтрация по дате и статусу)
+* Управление **сотрудниками** (профили, роли и доступы)
+* Аутентификация через Supabase (вход / выход)
+* Защищённые маршруты (Protected Routes)
+* Обработка ошибок и границы ошибок (Error Boundaries)
